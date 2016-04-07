@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+.reveal section img {
+  border: none;
+  background: none;
+}
+
+.third {
+  float: left;
+  width: 33%;
+  padding: 15px;
+}
+
+.why .third {
+  margin-top: 1em;
+}
+
+#theme-counter {
+  opacity: 1;
+  transition: all 0.5s;
+  
+  margin-top: 3em;
+  font-size: 1.4em;
+}
+
+#theme-counter.invisible {
+  opacity: 0;
+}
