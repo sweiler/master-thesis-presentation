@@ -4,9 +4,8 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Game Jams</title>
+		<title>Integrating an API-Misuse Detector into Eclipse</title>
 
-		<meta name="description" content="What are game jams?">
 		<meta name="author" content="Simon Weiler">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -42,118 +41,142 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-				  <h1>Game Jams</h1>
+				  <h1>Integrating an API-Misuse Detector into Eclipse</h1>
 				  <h3 style="color: #e7ad52;">Simon Weiler</h3>
-				</section>
-				
-				<section>
-				  <h2>What is a game jam?</h2>
-				  <br />
-				  <h4 class="fragment">Build a game.</h4>
-				  <h4 class="fragment">To a given theme.</h4>
-				  <h4 class="fragment">In 24 - 72 hours.</h4>
-				</section>
-				
-				<section>
-				  <h2>Themes?</h2>
-				  <div id="theme-counter">
-				  </div>
-				  <aside class="notes">
-				    Here a some themes, so you get a glimpse of what a theme could be.
-				  </aside>
-				</section>
-				
-				<section>
-				  <img src="images/kom.jpg" />
-				  <aside class="notes">
-				    Serious Games Work Group<br />
-				    Breakfast, Brainstorming, Mostly students
-				  </aside>
-				</section>
-				
-				<section>
-				  <p style="width: 50%; float: left; padding: 15px;">
-				    <img src="images/ludumdare.png" /><br />
-				    <a href="http://ludumdare.com/compo/">ludumdare.com/compo/</a>
-				  </p>
-				  <p style="width: 50%; float: left; padding: 15px;">
-				    <img width="450" src="images/globalgamejam.png" /><br />
-				    <a href="http://globalgamejam.org">globalgamejam.org</a>
-				  </p>
+				  <h4>Master Thesis Presentation</h4>
 				  
-				  <aside class="notes">
-				    Ludum dare is more "open", whereas the Global Game Jam requires official locations.
+				  <aside class="notes" data-markdown>
+				    - Welcome to my presentation
+				    - Mention all but API misuses
 				  </aside>
 				</section>
 				
 				<section>
-				  <h2>Personal participations</h2>
-				  <section>
-				    <img width="500" src="images/10sion.gif" />
-				    <aside class="notes">
-				      Ludum Dare 27, 2013, "10 seconds"<br />
-				      You play 10 seconds "blind" and then you see what the effect was.
-				    </aside>
+				  <h2>API Misuses</h2>
+				  <pre class="fragment"><code class="java" data-trim>
+public void readByte(File f) throws IOException {
+  InputStream is = new FileInputStream(f);
+  int firstByte = is.read();
+  
+  return firstByte;
+}
+				  </code></pre>
+				  
+				  <pre class="fragment"><code class="java" data-trim>
+public void listRemoveIfNotAwesome(List&lt;FancyObject&gt; list) {
+  for (FancyObject obj : list) {  
+    if (obj.isNotAwesome()) {
+      list.remove(obj);
+    }
+  }
+}
+				  </code></pre>
+				  <aside class="notes" data-markdown>
+            - API misuse: Using an API in a way that is not intended</li>
+            - EXAMPLE FOR AN API MISUSE (Concurrent Modification)</li>
+            - Currently there are only few tools to detect API misuses automatically</li>
+            - Integration of an Detector in an IDE is a very useful and convenient thing</li>
+				  </aside>
+				</section>
+				
+			  <section>
+			    <h2>Outline</h2>
+			    <ol>
+			      <li>Introduction</li>
+			      <li>Prototype</li>
+			      <li>User Interface</li>
+			      <li>Evaluation</li>
+			    </ol>
+			  </section>
+			  
+			  <section>
+			    <h1>Prototype</h1>
+			    <aside class="notes" data-markdown>
+			      We wanted to develop a prototypical plug-in that would solve the problem of detecting actual
+  misuses in a simple, but end-to-end manner
+			    </aside>
+			  </section>
+			  
+			  <section>
+			    <h2>GrouMiner</h2>
+			    <img src="images/groum_paper.png" />
+			    
+			    <aside class="notes" data-markdown>
+			      - API-Misuse Detector with graph-based models
+            - This thesis' models should be similar to the GROUMs
+            - Independent of GrouMiner
+			    </aside>
+			  </section>
+			  
+			  <section>
+			    <h2>Prototype</h2>
+			    <section>
+		        <br />
+		        <br />
+		        <br />
+		        <object class="svg-with-fragments" data="images/prototype_flow_fragments.svg" type="image/svg+xml">
+		        </object>
+		        <aside class="notes" data-markup>
+		          - Own GROUM-like models
+		          - Run through diagram
+		        </aside>
+		      </section>
+		    
+			    <section>
+		        <img src="images/prototype.png" />
+		      </section>
+			  </section>
+			  
+			  <section>
+			    <h1>User Interface</h1>
+			    <aside class="notes" data-markup>
+			      - The user interface is most important
+			    </aside>
+			  </section>
+			  
+			  <section>
+			    <h2>Five Factors of<br />User-Interface Quality</h2>
+			    <h4>for Recommendation Systems in Software Engineering (RSSEs)</h4>
+			    <div class="row">
+			      <span class="fragment row__part">Understandability</span>
+			      <span class="fragment row__part">Assessability</span>
+			      <span class="fragment row__part">Transparency</span>
+		      </div>
+		      <div class="row">
+			      <span class="fragment row__part">Trust</span>
+			      <span class="fragment row__part">Distraction</span>
+			    </div>
+			    <div class="row fragment">
+			      by <i>Murphy-Hill and Murphy</i>
+			    </div>
+			  </section>
+			  
+			  <section>
+			    <h2>User-Interface Proposals</h2>
+			    <section>
+			      <h4>Multiple Patterns</h4>
+			      <img src="images/example_multiple-patterns.png" />
 			    </section>
 			    <section>
-				    <img src="images/colorjam.gif" />
-				    <aside class="notes">
-				      GGJ 2014, "We don't see things as they are, we see them as we are."<br />
-				      You paint yourself in these "showers" and can only see and interact with objects
-				      in the same color.
-				    </aside>
+			      <h4>Hiding Recommendations</h4>
+			      <img src="images/example_hide-recommendations.png" />
 			    </section>
-				  <section class="wog-section">
-				    <img src="images/wog.gif" />
-				    <aside class="notes">
-				      Ludum Dare 30, 2014, "Connected Worlds"
-				    </aside>
+			    <section>
+			      <h4>Usage-Model Visualizations</h4>
+		        <img class="floating fragment" src="images/example-graph.png" />
+		        <img class="floating fragment" src="images/example-java.png" />
 			    </section>
-				</section>
+			    <section>
+			      <h4>Confidence Display</h4>
+			      <img src="images/confidence.png" />
+			    </section>
+			    <section>
+			      <h4>Quickfixes</h4>
+			    </section>
+			  </section>
 				
 				<section>
-				  <h2>Remarkable submissions</h2>
-				  <section>
-	  			  <img width="500" src="images/evoland.png" />
-	  			  <aside class="notes">
-	  			    Evoland: Ludum Dare 24 (2012, Evolution)<br />
-	  			    Show the evolution of games in a game itself.
-	  			  </aside>
-  			  </section>
-				  <section>  
-	  			  <img width="500" src="images/impetus.jpg" />
-	  			  <aside class="notes">
-	  			    Impetus: Ludum Dare 27 (2013)<br />
-	  			    More an experiment then a game. Lived for nearly 12 hrs.
-	  			  </aside>
-				  </section>
-				</section>
-				
-				<section class="why">
-				  <h2>Why?</h2>
-				  <div class="third fragment">
-				    <img src="images/learn.svg" /><br />
-				    Learn
-				  </div>
-				  <div class="third fragment">
-				    <img src="images/people.svg" /><br />
-				    Get to know people
-				  </div>
-				  <div class="third fragment">
-				  <img src="images/fun.svg" /><br />
-				    Fun
-				  </div>
-				  
-				  <aside class="notes">
-				    Learn: Program, Graphics, Sound, Story, but also Team<br />
-				    Get to know people: People you didn't know before, different skills<br />
-				    Fun: Think about the theme, see others ideas, play games.<br />
-				    The next "Ludum Dare" will be next weekend, April 15th.
-				  </aside>
-				</section>
-				
-				<section>
-				  <h1>Question time!</h1>
+				  <h1>Time for questions!</h1>
 				</section>
 
 			</div>
@@ -162,67 +185,48 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-    <script id="compo-themes" type="text/plain">
-      You are the Monster
-An Unconventional Weapon
-Entire Game on One Screen
-Connected Worlds
-Beneath The Surface
-You Only Get One
-10 Seconds
-Minimalism
-You are the Villain
-Evolution
-Tiny World
-Alone
-Escape
-It’s dangerous to go alone! Take this!
-Discovery
-Enemies as Weapons
-Islands
-Exploration
-Caverns
-Advancing Wall of Doom
-Roads
-The Tower
-Minimalist
-Weird / Unexpected / Surprise
-Chain Reaction
-Build The Level You Play
-Moon / Anti-text
-Swarms
-Growth
-Light and Darkness
-Random
-Infection
-Preparation – Set it up, let it go
-Construction/Destruction
-Guardian
-Indirect Interaction
-</script>
-    <script src="js/themes-counter.js"></script>
 		<script>
+			var itms = document.getElementsByClassName("svg-with-fragments");
+			var i;
+			var load_counter = itms.length;
+			
+			function check() {
+			  load_counter--;
+			  if(load_counter <= 0) {
+			    // Full list of configuration options available at:
+			    // https://github.com/hakimel/reveal.js#configuration
+			    Reveal.initialize({
+				    controls: false,
+				    progress: true,
+				    history: true,
+				    center: true,
+				    slideNumber: 'c/t',
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: false,
-				progress: true,
-				history: true,
-				center: true,
+				    transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
+				    // Optional reveal.js plugins
+				    dependencies: [
+					    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					    { src: 'plugin/zoom-js/zoom.js', async: true },
+					    { src: 'plugin/notes/notes.js', async: true }
+				    ]
+			    });
+			    
+			  }
+			}
+			  
+		  for (i = 0; i < itms.length; i++) {
+        var e = itms[i];
+        e.addEventListener("load", function () {
+          e.parentElement.replaceChild(e.contentDocument.documentElement.cloneNode(true), e);
+          check();
+        });
+			}
+			
+		
 
 		</script>
 

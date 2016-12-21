@@ -2,9 +2,26 @@
   box-sizing: border-box;
 }
 
+.reveal h1 {
+  font-size: 5rem;
+}
+
+.reveal h4 {
+  color: #59B279;
+}
+
 .reveal section img {
   border: none;
   background: none;
+}
+
+.reveal .row {
+  margin-top: 1em;
+}
+
+.reveal .row .row__part {
+  margin: 0 30px;
+  display: inline-block;
 }
 
 .third {
@@ -27,4 +44,10 @@
 
 #theme-counter.invisible {
   opacity: 0;
+}
+
+.reveal img.floating {
+  float: left;
+  margin: 0 10px;
+  max-height: 400px;
 }
