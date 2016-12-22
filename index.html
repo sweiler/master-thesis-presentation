@@ -174,6 +174,102 @@ public void listRemoveIfNotAwesome(List&lt;FancyObject&gt; list) {
 			      <h4>Quickfixes</h4>
 			    </section>
 			  </section>
+			  
+			  <section>
+			    <h1>Evaluation</h1>
+			    <aside class="notes">
+			      We wanted to evaluate how good these proposals perform, based on the factors.
+			    </aside>
+			  </section>
+			  
+			  <section>
+			    <h2>What do we want to measure?</h2>
+			    <br />
+			    <br />
+			    <div class="fragment half">
+			      <h4>Understandability</h4>
+			      Multiple Patterns<br />
+			      Visualizations
+			    </div>
+			    <div class="fragment half">
+			      <h4>Assessability</h4>
+			      Confidence Display
+			    </div>
+			    
+			    <aside class="notes">
+			      Focus on two factors mainly, because most important here<br />
+			      Web-based study because easy, no install, etc.
+			    </aside>
+			  </section>
+			  
+			  <section>
+			    <h2>Web-based Questionnaire</h2>
+			    <object class="svg-with-fragments" data="images/questionnaire_structure_fragments.svg" type="image/svg+xml">
+	        </object>
+	        <aside class="notes" data-markdown>
+	          - Measure the understandability in two dimensions
+	          - Describe how we measure understandability / assessability
+	        </aside>
+			  </section>
+			  
+			  <section>
+			    <h2>Results</h2>
+			    <section>
+			      <h4>Multiple Patterns</h4>
+			      <img src="images/results-multiple-patterns.png" />
+			    </section>
+			    <section>
+			      <h4>Usage-Model Visualizations</h4>
+			      <img src="images/results-visualizations.png" />
+			    </section>
+			    <section>
+			      <h4>Confidence Display</h4>
+			      <table>
+			        <tr>
+			          <th>&nbsp;</th>
+			          <th>JDBC Close Statement</th>
+			          <th>ByteBuffer Flip</th>
+			        </tr>
+			        <tr>
+			          <td>No Confidence Display</td>
+			          <td>0.4</td>
+			          <td>0.222</td>
+			        </tr>
+			        <tr>
+			          <td>Useful Confidence Values</td>
+			          <td>0.457</td>
+			          <td>0.25</td>
+			        </tr>
+			        <tr>
+			          <td>Misleading Confidence Values</td>
+			          <td>0.4</td>
+			          <td>0.125</td>
+			        </tr>
+			      </table>
+			    </section>
+			    <section>
+			      <h4>Qualitative Results</h4>
+			      <p class="fragment row">
+			        No consent about what is an API Misuse
+			      </p>
+			      <p class="fragment row">
+			        Explanations
+			      </p>
+			    </section>
+			  </section>
+			  
+			  <section>
+			    <h2>Conclusion</h2>
+			    <div class="row fragment">
+			      More Participants
+			    </div>
+			    <div class="row fragment">
+			      Better Group Distribution
+			    </div>
+			    <div class="row fragment">
+			      Nonetheless: Useful Insights & Good Answers
+			    </div>
+			  </section>
 				
 				<section>
 				  <h1>Time for questions!</h1>
@@ -186,47 +282,42 @@ public void listRemoveIfNotAwesome(List&lt;FancyObject&gt; list) {
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 		<script>
+			
+			
+			
 			var itms = document.getElementsByClassName("svg-with-fragments");
 			var i;
-			var load_counter = itms.length;
-			
-			function check() {
-			  load_counter--;
-			  if(load_counter <= 0) {
-			    // Full list of configuration options available at:
-			    // https://github.com/hakimel/reveal.js#configuration
-			    Reveal.initialize({
-				    controls: false,
-				    progress: true,
-				    history: true,
-				    center: true,
-				    slideNumber: 'c/t',
-
-				    transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				    // Optional reveal.js plugins
-				    dependencies: [
-					    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					    { src: 'plugin/zoom-js/zoom.js', async: true },
-					    { src: 'plugin/notes/notes.js', async: true }
-				    ]
-			    });
-			    
-			  }
-			}
-			  
 		  for (i = 0; i < itms.length; i++) {
-        var e = itms[i];
-        e.addEventListener("load", function () {
+        
+        itms[i].addEventListener("load", function () {
+          var e = this;
           e.parentElement.replaceChild(e.contentDocument.documentElement.cloneNode(true), e);
-          check();
+          //check();
         });
 			}
 			
-		
+		  
+			// Full list of configuration options available at:
+	    // https://github.com/hakimel/reveal.js#configuration
+	    Reveal.initialize({
+		    controls: false,
+		    progress: true,
+		    history: true,
+		    center: true,
+		    slideNumber: 'c/t',
+
+		    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		    // Optional reveal.js plugins
+		    dependencies: [
+			    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			    { src: 'plugin/zoom-js/zoom.js', async: true },
+			    { src: 'plugin/notes/notes.js', async: true }
+		    ]
+	    });
 
 		</script>
 

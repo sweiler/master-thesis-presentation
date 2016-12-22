@@ -30,6 +30,12 @@
   padding: 15px;
 }
 
+.half {
+  float: left;
+  width: 50%;
+  padding: 15px;
+}
+
 .why .third {
   margin-top: 1em;
 }
